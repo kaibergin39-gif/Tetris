@@ -42,6 +42,7 @@ def build_ui(root: tk.Tk) -> None:
         "programmer": "the API on the other side had better docs",
         "banana": "it slipped up and split",
         "turtle": "to get to the shell station",
+        "fish": "to get to the other tide",
     }
 
     def generate(*_):
