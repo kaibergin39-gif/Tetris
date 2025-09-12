@@ -41,6 +41,7 @@ def build_ui(root: tk.Tk) -> None:
         "robot": "it followed the shortest path algorithm",
         "programmer": "the API on the other side had better docs",
         "banana": "it slipped up and split",
+        "turtle": "to get to the shell station",
     }
 
     def generate(*_):
