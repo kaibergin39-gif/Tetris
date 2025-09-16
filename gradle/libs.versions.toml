@@ -1,0 +1,23 @@
+[versions]
+junit = "5.11.0"
+mockito = "5.12.0"
+assertj = "3.26.3"
+jackson = "2.18.1"
+javafx = "23.0.1"
+spotbugs = "4.8.4"
+
+[libraries]
+junit-bom = { group = "org.junit", name = "junit-bom", version.ref = "junit" }
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter" }
+mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
+assertj-core = { group = "org.assertj", name = "assertj-core", version.ref = "assertj" }
+jackson-databind = { group = "com.fasterxml.jackson.core", name = "jackson-databind", version.ref = "jackson" }
+jackson-jsr310 = { group = "com.fasterxml.jackson.datatype", name = "jackson-datatype-jsr310", version.ref = "jackson" }
+javafx-base = { group = "org.openjfx", name = "javafx-base", version.ref = "javafx" }
+javafx-controls = { group = "org.openjfx", name = "javafx-controls", version.ref = "javafx" }
+javafx-graphics = { group = "org.openjfx", name = "javafx-graphics", version.ref = "javafx" }
+spotbugs-annotations = { group = "com.github.spotbugs", name = "spotbugs-annotations", version.ref = "spotbugs" }
+
+[plugins]
+spotbugs = { id = "com.github.spotbugs", version = "6.0.20" }
+javafx = { id = "org.openjfx.javafxplugin", version = "0.1.0" }

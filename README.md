@@ -82,6 +82,23 @@
 ## 13. Non-goals (v0.1)
 - Competitive multiplayer, guideline-exact finesse detection, piece "preview skins," online profiles.
 
+## 14. Technology & architecture guardrails
+- **Language/runtime:** Java 17 LTS or newer for access to sealed classes, records, switch expressions, and modern PRNG APIs.
+- **Build:** Gradle with version catalogs (`gradle/libs.versions.toml`). Prefer convention plugins for shared configuration across modules.
+- **Modules:** Feature-oriented Gradle subprojects separating concerns:
+  - `game-core` – deterministic rules/state engine, pure logic tick loop, no direct time queries.
+  - `game-ui` – JavaFX desktop renderer that consumes immutable snapshots from the core.
+  - `game-audio` – sound effect/background music playback abstractions.
+  - `game-persistence` – local high-score storage and telemetry hooks (JSON or embedded database).
+  - `game-tests` – black-box/acceptance tests that exercise the published core API and persistence boundaries.
+- **Threads:** Maintain a fixed-timestep logic loop (e.g., 60 Hz accumulator using `System.nanoTime()`). Rendering runs on the UI thread against the latest committed `GameSnapshot`.
+- **Randomness:** Centralize a seedable `SplittableRandom` 7-bag generator so tests and seeded runs reproduce sequences.
+- **Data modeling:** Represent tetrominoes as enums with immutable rotation states and expose SRS kick tables as data assets.
+- **Input processing:** Map raw inputs to high-level intentions queued for the next logic tick; include configurable DAS/ARR parameters.
+- **Testing & quality:** Use JUnit 5 (with parameterized tests) plus Checkstyle (Google style), SpotBugs, and optionally PMD wired into CI.
+- **Persistence:** Abstract high-score repositories to allow in-memory fakes for tests; default implementation writes JSON locally.
+- **Telemetry:** (Optional) Emit Java Flight Recorder custom events for gameplay milestones (line clears, level-ups, top-outs).
+
 ---
 
 ### Appendix A: Gravity timings
